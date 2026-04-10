@@ -1,0 +1,24 @@
+<div class="shell">
+  <!-- Top header used for global branding and actions -->
+  <header class="shell__header">
+    <div class="shell__brand">Enterprise MF Platform</div>
+
+    <div class="shell__header-actions">
+      <span class="shell__user">Muhammad Yasir</span>
+    </div>
+  </header>
+
+  <div class="shell__body">
+    <!-- Left navigation owned by the shell -->
+    <aside class="shell__sidebar">
+      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/orders" routerLinkActive="active">Orders</a>
+      <a routerLink="/admin" routerLinkActive="active">Admin</a>
+    </aside>
+
+    <!-- Remote applications render inside this area -->
+    <main class="shell__content">
+      <router-outlet />
+    </main>
+  </div>
+</div>
