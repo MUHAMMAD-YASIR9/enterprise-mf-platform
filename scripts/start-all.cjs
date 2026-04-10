@@ -9,7 +9,6 @@ const services = [
 ];
 
 const reset = '\x1b[0m';
-const npmCommand = process.platform === 'win32' ? 'npm.cmd' : 'npm';
 const children = [];
 let shuttingDown = false;
 
@@ -39,9 +38,15 @@ function shutdown(signal) {
 }
 
 for (const service of services) {
-  const child = spawn(npmCommand, ['run', service.script], {
+  const command =
+    process.platform === 'win32'
+      ? { file: 'cmd.exe', args: ['/d', '/s', '/c', `npm run ${service.script}`] }
+      : { file: 'npm', args: ['run', service.script] };
+
+  const child = spawn(command.file, command.args, {
     stdio: ['inherit', 'pipe', 'pipe'],
     env: process.env,
+    windowsHide: false,
   });
 
   children.push(child);
